@@ -16,9 +16,9 @@ import {
 import { CreateProductCommand } from 'src/features/catalogue/application/commands/create-product.command'
 import { FindProductsQuery } from 'src/features/catalogue/application/queries/find-products/find-products.query'
 import { CreateProductBodyDTO } from 'src/features/catalogue/presentation/dto/create-product/create-product.body.dto'
-import { CreateProductResultDto } from 'src/features/catalogue/presentation/dto/create-product/create-product.result.dto'
+import { CreateProductResultDTO } from 'src/features/catalogue/presentation/dto/create-product/create-product.result.dto'
 import { FindProductsQueryDTO } from 'src/features/catalogue/presentation/dto/find-products/find-products.query.dto'
-import { FindProductsResultDto } from 'src/features/catalogue/presentation/dto/find-products/find-products.result.dto'
+import { FindProductsResultDTO } from 'src/features/catalogue/presentation/dto/find-products/find-products.result.dto'
 import { ResponseDescription } from 'src/features/catalogue/presentation/response-description'
 
 @Controller('catalogue')
@@ -32,7 +32,7 @@ export class CatalogueController {
   @ApiResponse({
     status: 200,
     description: ResponseDescription.OK,
-    type: FindProductsResultDto,
+    type: FindProductsResultDTO,
   })
   @ApiBadRequestResponse({ description: ResponseDescription.BAD_REQUEST })
   @ApiInternalServerErrorResponse({
@@ -48,7 +48,7 @@ export class CatalogueController {
   @ApiResponse({
     status: 201,
     description: ResponseDescription.CREATED,
-    type: CreateProductResultDto,
+    type: CreateProductResultDTO,
   })
   @ApiBadRequestResponse({ description: ResponseDescription.BAD_REQUEST })
   @ApiInternalServerErrorResponse({
