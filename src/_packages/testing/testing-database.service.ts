@@ -1,17 +1,17 @@
 /* eslint-disable no-await-in-loop */
 import { Injectable } from '@nestjs/common'
-import { Connection, getConnection } from 'typeorm'
+import { InjectDataSource } from '@nestjs/typeorm'
+import { DataSource } from 'typeorm/data-source/DataSource'
 
 @Injectable()
 export class TestingDatabaseService {
-  // TODO: use injection instead
-  constructor(public connection: Connection = getConnection()) {}
+  constructor(@InjectDataSource() public dataSource: DataSource) {}
 
   public async clearDb() {
-    const entities = this.connection.entityMetadatas
+    const entities = this.dataSource.entityMetadatas
 
     for (const entity of entities) {
-      const repository = this.connection.getRepository(entity.name)
+      const repository = this.dataSource.getRepository(entity.name)
       await repository.query(
         `TRUNCATE TABLE "${entity.tableName}" RESTART IDENTITY CASCADE`
       )

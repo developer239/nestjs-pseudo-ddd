@@ -10,6 +10,7 @@ export interface IConfig {
   migrations?: string[]
 }
 
+// TODO: refactor
 @Module({})
 export class DatabaseModule {
   static register(config?: IConfig) {

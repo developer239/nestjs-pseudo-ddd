@@ -2,12 +2,12 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 import { BaseEntity } from 'src/_packages/core/entities/base.entity'
 
 @Entity()
-export class ProductEntity extends BaseEntity {
+export class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn() id: number
 
-  @Column({ type: 'varchar' }) name = ''
+  @Column() firstName: string
 
-  @Column({ type: 'text' }) description = ''
+  @Column() lastName: string
 
-  @Column({ type: 'float' }) price = 0
+  @Column() email: string
 }

@@ -3,6 +3,7 @@ import { NestFactory } from '@nestjs/core'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { AppModule } from 'src/app.module'
 
+// TODO: update bootstrap method
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
 

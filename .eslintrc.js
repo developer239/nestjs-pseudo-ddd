@@ -6,6 +6,7 @@ module.exports = {
     'prettier',
   ],
   rules: {
-    '@typescript-eslint/prefer-nullish-coalescing': 0
+    '@typescript-eslint/prefer-nullish-coalescing': 0,
+    'jest/prefer-strict-equal': 1
   }
 }

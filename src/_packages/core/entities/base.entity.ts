@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer'
 import {
   BaseEntity as TypeORMBaseEntity,
   CreateDateColumn,
@@ -8,12 +9,9 @@ import {
 
 @Entity()
 export class BaseEntity extends TypeORMBaseEntity {
-  @CreateDateColumn()
-  createdAt?: Date = new Date()
+  @Exclude() @CreateDateColumn({ select: false }) createdAt?: Date = new Date()
 
-  @UpdateDateColumn()
-  updatedAt?: Date = new Date()
+  @Exclude() @UpdateDateColumn({ select: false }) updatedAt?: Date = new Date()
 
-  @DeleteDateColumn()
-  deletedAt?: Date | null = null
+  @Exclude() @DeleteDateColumn({ select: false }) deletedAt?: Date | null = null
 }
