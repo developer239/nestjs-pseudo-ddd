@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
 import { DatabaseModule } from 'src/_packages/database/database.module'
 import { EnvironmentModule } from 'src/_packages/env/env.module'
-import { CatalogueModule } from 'src/features/catalogue/catalogue.module'
+import { ProductsModule } from 'src/features/products/products.module'
 
 @Module({
   imports: [
@@ -9,7 +9,7 @@ import { CatalogueModule } from 'src/features/catalogue/catalogue.module'
       NODE_ENV: process.env.NODE_ENV as 'production' | 'development' | 'test',
     }),
     DatabaseModule.register(),
-    CatalogueModule,
+    ProductsModule,
   ],
   controllers: [],
   providers: [],
