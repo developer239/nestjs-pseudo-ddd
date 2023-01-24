@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { getRepository, Repository } from 'typeorm'
+import { DataSource, Repository } from 'typeorm';
 import { ProductFactory } from 'src/features/catalogue/domain/product/product.factory'
 import { IProductModel } from 'src/features/catalogue/domain/product/product.model'
 import { ProductQuery } from 'src/features/catalogue/domain/product/product.query'
@@ -10,7 +10,7 @@ export class ProductQueryImplement
   extends Repository<ProductEntity>
   implements ProductQuery
 {
-  constructor(private readonly productFactory: ProductFactory) {
+  constructor(private readonly productFactory: ProductFactory, private readonly dataSource: DataSource) {
     // TODO: double check typescript error
     // @ts-ignore
     super()
@@ -20,7 +20,7 @@ export class ProductQueryImplement
     offset?: number,
     limit?: number
   ): Promise<IProductModel[]> {
-    const products = await getRepository(ProductEntity)
+    const products = await this.dataSource.getRepository(ProductEntity)
       .createQueryBuilder('product')
       .offset(offset)
       .limit(limit)

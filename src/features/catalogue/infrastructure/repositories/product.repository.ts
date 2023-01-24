@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { getManager, Repository } from 'typeorm'
+import { DataSource, Repository } from 'typeorm';
 import { ProductFactory } from 'src/features/catalogue/domain/product/product.factory'
 import {
   IProductModel,
@@ -13,7 +13,7 @@ export class ProductRepositoryImplement
   extends Repository<ProductEntity>
   implements ProductRepository
 {
-  constructor(private readonly productFactory: ProductFactory) {
+  constructor(private readonly productFactory: ProductFactory, private readonly dataSource: DataSource) {
     // TODO: double check typescript error
     // @ts-ignore
     super()
@@ -27,8 +27,7 @@ export class ProductRepositoryImplement
     productEntity.description = data.description
     productEntity.price = data.price
 
-    const manager = getManager()
-    await manager.save(productEntity)
+    await productEntity.save()
 
     return this.entityToModel(productEntity)
   }
