@@ -3,11 +3,11 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { TestingDatabaseService } from 'src/_packages/testing/testing-database.service'
 import { TestingEntityService } from 'src/_packages/testing/testing-entity.service'
 import { bootstrap } from 'src/_packages/testing/utilities'
-import { ProductEntity } from 'src/features/products/entities/product/product.entity'
-import { ProductRepository } from 'src/features/products/entities/product/product.repository'
-import { ProductModelFixtures } from 'src/features/products/models/product/product.model.fixtures'
+import { ProductModelFixtures } from 'src/features/products/domain/product/product.model.fixtures'
+import { ProductEntity } from 'src/features/products/infrastructure/product/product.entity'
+import { ProductRepository } from 'src/features/products/infrastructure/product/product.repository'
 
-describe('[infrastructure] product repository', () => {
+describe('[entities] product repository', () => {
   let productRepository: ProductRepository
   let databaseService: TestingDatabaseService
   let testingEntityService: TestingEntityService
@@ -53,7 +53,7 @@ describe('[infrastructure] product repository', () => {
 
       const result = await productRepository.findProducts()
 
-      expect(result.getAll()).toHaveLength(2)
+      expect(result).toHaveLength(2)
     })
 
     describe('when offset', () => {
@@ -76,7 +76,7 @@ describe('[infrastructure] product repository', () => {
 
         const result = await productRepository.findProducts(1)
 
-        expect(result.getAll()).toStrictEqual([product2, product3])
+        expect(result).toStrictEqual([product2, product3])
       })
     })
 
@@ -99,7 +99,7 @@ describe('[infrastructure] product repository', () => {
 
         const product1 = productRepository.entityToModel(entity1)
 
-        expect(result.getAll()).toStrictEqual([product1])
+        expect(result).toStrictEqual([product1])
       })
     })
   })

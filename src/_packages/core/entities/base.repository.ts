@@ -1,6 +1,6 @@
 /* eslint-disable security/detect-object-injection */
 import { BaseEntity, Repository } from 'typeorm'
-import { BaseModel } from '../models/base.model'
+import { BaseModel } from 'src/_packages/core/models/base.model'
 
 interface IModelProperties {
   [key: string]: any
@@ -8,7 +8,7 @@ interface IModelProperties {
 
 export abstract class BaseRepository<
   TEntity extends BaseEntity,
-  TModel extends BaseModel<{}, {}, {}>
+  TModel extends BaseModel<{}>
 > extends Repository<TEntity> {
   // TODO: use reflection
   protected propertiesToEntityBase(

@@ -1,4 +1,4 @@
-import { ProductProperties } from 'src/features/products/models/product/product.model'
+import { ProductProperties } from 'src/features/products/domain/product/product.model'
 
 // TODO: use actual library for fixtures
 const faker = {

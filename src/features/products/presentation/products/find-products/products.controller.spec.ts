@@ -2,16 +2,15 @@ import { TestingModule } from '@nestjs/testing'
 import { TestingDatabaseService } from 'src/_packages/testing/testing-database.service'
 import { TestingEntityService } from 'src/_packages/testing/testing-entity.service'
 import { bootstrap } from 'src/_packages/testing/utilities'
-import { CreateProductBodyDTO } from 'src/features/products/controllers/products/dto/create-product.body.dto'
-import { FindProductsBodyDto } from 'src/features/products/controllers/products/dto/find-products.body.dto'
-import { ProductsController } from 'src/features/products/controllers/products/products.controller'
-import { ProductEntity } from 'src/features/products/entities/product/product.entity'
-import { ProductModel } from 'src/features/products/models/product/product.model'
-import { ProductModelFixtures } from 'src/features/products/models/product/product.model.fixtures'
+import { FindProductsBodyDTO } from 'src/features/products/presentation/products/find-products/dto/find-products.body.dto'
+import { FindProductsController } from 'src/features/products/presentation/products/find-products/products.controller'
+import { ProductEntity } from 'src/features/products/infrastructure/product/product.entity'
+import { ProductModel } from 'src/features/products/domain/product/product.model'
+import { ProductModelFixtures } from 'src/features/products/domain/product/product.model.fixtures'
 import { ProductsModule } from 'src/features/products/products.module'
 
-describe('[presentation] products controller', () => {
-  let controllerToTest: ProductsController
+describe('[controllers] products controller', () => {
+  let controllerToTest: FindProductsController
   let databaseService: TestingDatabaseService
   let testingEntityService: TestingEntityService
 
@@ -24,7 +23,7 @@ describe('[presentation] products controller', () => {
 
     databaseService = moduleRef.get(TestingDatabaseService)
     testingEntityService = moduleRef.get(TestingEntityService)
-    controllerToTest = moduleRef.get(ProductsController)
+    controllerToTest = moduleRef.get(FindProductsController)
   })
 
   afterEach(async () => {
@@ -47,7 +46,7 @@ describe('[presentation] products controller', () => {
       )
 
       const result = await controllerToTest.findProducts(
-        new FindProductsBodyDto()
+        new FindProductsBodyDTO()
       )
 
       expect(result).toStrictEqual({
@@ -66,28 +65,6 @@ describe('[presentation] products controller', () => {
           }),
         ],
       })
-    })
-  })
-
-  describe('createProduct', () => {
-    it('should create new product', async () => {
-      const productData = ProductModelFixtures.getData()
-
-      const createProductBodyDto = new CreateProductBodyDTO()
-      createProductBodyDto.name = productData.name
-      createProductBodyDto.description = productData.description
-      createProductBodyDto.price = productData.price
-
-      const result = await controllerToTest.createProduct(createProductBodyDto)
-
-      expect(result).toStrictEqual(
-        new ProductModel({
-          id: result.properties().id,
-          name: productData.name,
-          description: productData.description,
-          price: productData.price,
-        })
-      )
     })
   })
 })

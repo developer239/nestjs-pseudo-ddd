@@ -1,30 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars,security/detect-object-injection */
 
-// Example
-//
-// export type ProductRequiredProperties = Required<{
-//   readonly id: number
-//   readonly name: string
-//   readonly description: string
-//   readonly price: number
-// }>
-//
-// export type ProductOptionalProperties = Partial<{}>
-//
-// export type ProductProperties = ProductRequiredProperties &
-//   ProductOptionalProperties
-
-// TODO: move to core @collection package
-export class BaseModel<
-  TRequiredProperties,
-  TOptionalProperties,
-  TUnsavedProperties
-> {
-  constructor(properties: TRequiredProperties & TOptionalProperties) {
+export class BaseModel<TProperties> {
+  constructor(properties: TProperties) {
     Object.assign(this, properties)
   }
 
-  public properties(): TRequiredProperties & TOptionalProperties {
+  public properties(): TProperties {
     const properties = Object.getOwnPropertyNames(this)
 
     const returnValue = {}
@@ -33,6 +14,6 @@ export class BaseModel<
       returnValue[property] = this[property]
     }
 
-    return returnValue as TRequiredProperties & TOptionalProperties
+    return returnValue as TProperties
   }
 }
