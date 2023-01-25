@@ -26,14 +26,16 @@ export class EventRepositoryImplement
   }
 
   public entityToModel(entity: EventEntity): EventModel {
-    const owner = entity.owner
-      ? new UserModel(
-          entity.owner.id,
-          entity.owner.firstName,
-          entity.owner.lastName,
-          entity.owner.email
-        )
-      : undefined
+    if (!entity.owner) {
+      throw new Error('Missing entity owner. Cannot convert to model.')
+    }
+
+    const owner = new UserModel(
+      entity.owner.id,
+      entity.owner.firstName,
+      entity.owner.lastName,
+      entity.owner.email
+    )
 
     const attendees = entity.attendees
       ? entity.attendees.map(

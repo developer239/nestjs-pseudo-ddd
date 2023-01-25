@@ -14,36 +14,13 @@ export interface IEventProperties {
 export type IUnsavedEventProperties = Omit<IEventProperties, 'id'>
 
 export class EventModel {
-  public id: number
-
-  public title: string
-
-  public description: string
-
-  public startsAt: Date
-
-  public capacity: number
-
-  public owner: UserModel
-
-  public attendees: UserModel[]
-
   constructor(
-    id: number,
-    title: string,
-    description: string,
-    startsAt: Date,
-    capacity: number,
-    owner?: UserModel,
-    attendees?: UserModel[]
-  ) {
-    this.id = id
-    this.title = title
-    this.description = description
-    this.startsAt = startsAt
-    this.capacity = capacity
-
-    if (owner) this.owner = owner
-    if (attendees) this.attendees = attendees
-  }
+    public id: number,
+    public title: string,
+    public description: string,
+    public startsAt: Date,
+    public capacity: number,
+    public owner: UserModel,
+    public attendees: UserModel[]
+  ) {}
 }
