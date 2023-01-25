@@ -8,21 +8,21 @@ import { createEventModelFixture } from 'src/features/events/domain/event.model.
 import { EventEntity } from 'src/features/events/infrastructure/event.entity'
 import { EventRepositoryImplement } from 'src/features/events/infrastructure/event.repository'
 
-describe('[infrastructure] product repository', () => {
+describe('[infrastructure] events repository', () => {
   let eventRepositoryImplement: EventRepositoryImplement
   let databaseService: TestingDatabaseService
   let testingEntityService: TestingEntityService
 
   describe('listEvents', () => {
-    it('should create product in database', async () => {
-      const event1 = await testingEntityService.create(
+    it('should list events', async () => {
+      const expectedEvent = await testingEntityService.createFixture(
         EventEntity,
         createEventModelFixture()
       )
 
       const result = await eventRepositoryImplement.listEvents()
 
-      expect(result).toEqual([event1])
+      expect(result).toEqual([expectedEvent])
     })
   })
 

@@ -25,7 +25,7 @@ const fixEntity = (entity: any) => {
 export class TestingEntityService {
   constructor(@InjectDataSource() public dataSource: DataSource) {}
 
-  public async create<TEntity extends BaseEntity, TData>(
+  public async createFixture<TEntity extends BaseEntity, TData>(
     model: IConstructorOf<TEntity>,
     data?: TData
   ): Promise<TEntity> {
