@@ -2,31 +2,31 @@
 import { IUserProperties, UserModel } from 'src/features/auth/domain/user.model'
 
 export interface IEventProperties {
-  readonly id: number
-  readonly title: string
-  readonly description: string
-  readonly startsAt: Date
-  readonly capacity: number
-  readonly owner: IUserProperties
-  readonly attendees: IUserProperties[]
+  id: number
+  title: string
+  description: string
+  startsAt: Date
+  capacity: number
+  owner: IUserProperties
+  attendees: IUserProperties[]
 }
 
 export type IUnsavedEventProperties = Omit<IEventProperties, 'id'>
 
 export class EventModel {
-  private readonly id: number
+  public id: number
 
-  private readonly title: string
+  public title: string
 
-  private readonly description: string
+  public description: string
 
-  private readonly startsAt: Date
+  public startsAt: Date
 
-  private readonly capacity: number
+  public capacity: number
 
-  private readonly owner: UserModel
+  public owner: UserModel
 
-  private readonly attendees: UserModel[]
+  public attendees: UserModel[]
 
   constructor(
     id: number,
@@ -43,7 +43,7 @@ export class EventModel {
     this.startsAt = startsAt
     this.capacity = capacity
 
-    if(owner) this.owner = owner
-    if(attendees) this.attendees = attendees
+    if (owner) this.owner = owner
+    if (attendees) this.attendees = attendees
   }
 }

@@ -19,8 +19,6 @@ export const createEventModelFixture = (
         min: 1,
         max: 100,
       }),
-    // TODO: fix typescript error
-    // @ts-ignore
     data.owner || createUserModelFixture(),
     data.attendees || [
       createUserModelFixture(),
