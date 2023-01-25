@@ -1,5 +1,4 @@
 import { Module, Provider } from '@nestjs/common'
-import { CqrsModule } from '@nestjs/cqrs'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { UserEntity } from 'src/features/auth/infrastructure/user.entity'
 import { EventsService } from 'src/features/events/application/event.service'
@@ -20,7 +19,7 @@ const domain = []
 const application = [EventsService]
 
 @Module({
-  imports: [CqrsModule, TypeOrmModule.forFeature([EventEntity, UserEntity])],
+  imports: [TypeOrmModule.forFeature([EventEntity, UserEntity])],
   controllers: [EventController],
   providers: [...application, ...domain, ...infrastructure],
   exports: [],
