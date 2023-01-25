@@ -8,7 +8,7 @@ export abstract class BaseRepository<
   TEntity extends BaseEntity,
   TModel
 > extends Repository<TEntity> {
-  public abstract propertiesToEntity(properties: IModelProperties): TEntity
+  protected abstract propertiesToEntity(properties: IModelProperties): TEntity
 
-  public abstract entityToModel(entity: TEntity): TModel
+  protected abstract entityToModel(entity: TEntity): TModel
 }

@@ -25,7 +25,7 @@ export class EventRepositoryImplement
     return entities.map((entity) => this.entityToModel(entity))
   }
 
-  public entityToModel(entity: EventEntity): EventModel {
+  protected entityToModel(entity: EventEntity): EventModel {
     if (!entity.owner) {
       throw new Error('Missing entity owner. Cannot convert to model.')
     }
@@ -60,7 +60,7 @@ export class EventRepositoryImplement
     )
   }
 
-  public propertiesToEntity(properties: IUnsavedEventProperties): EventEntity {
+  protected propertiesToEntity(properties: IUnsavedEventProperties): EventEntity {
     const entity = new EventEntity()
     entity.title = properties.title
     entity.description = properties.description
