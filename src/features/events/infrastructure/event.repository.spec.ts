@@ -13,6 +13,23 @@ describe('[infrastructure] product repository', () => {
   let databaseService: TestingDatabaseService
   let testingEntityService: TestingEntityService
 
+  describe('listEvents', () => {
+    it('should create product in database', async () => {
+      const event1 = await testingEntityService.create(
+        EventEntity,
+        createEventModelFixture()
+      )
+
+      const result = await eventRepositoryImplement.listEvents()
+
+      expect(result).toEqual([event1])
+    })
+  })
+
+  //
+  //
+  // setup
+
   beforeAll(async () => {
     const moduleRef: TestingModule = await bootstrap({
       imports: [TypeOrmModule.forFeature([EventEntity, UserEntity])],
@@ -30,18 +47,5 @@ describe('[infrastructure] product repository', () => {
 
   afterAll(async () => {
     await databaseService.dataSource.destroy()
-  })
-
-  describe('listEvents', () => {
-    it('should create product in database', async () => {
-      const event1 = await testingEntityService.create(
-        EventEntity,
-        createEventModelFixture()
-      )
-
-      const result = await eventRepositoryImplement.listEvents()
-
-      expect(result).toEqual([event1])
-    })
   })
 })
