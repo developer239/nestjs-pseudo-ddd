@@ -5,9 +5,9 @@ import { BaseEntity } from 'src/_packages/core/entities/base.entity'
 export class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn() id: number
 
-  @Column() firstName: string
+  @Column() username: string
 
-  @Column() lastName: string
+  @Column() password: string
 
-  @Column() email: string
+  @Column() salt: string
 }

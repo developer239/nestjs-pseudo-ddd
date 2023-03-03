@@ -22,7 +22,9 @@ export class EventRepositoryImplement
       relations: ['owner', 'attendees'],
     })
 
-    return entities.map((entity) => this.entityToModel(entity))
+    return entities.map((entity) => {
+      return this.entityToModel(entity)
+    })
   }
 
   protected entityToModel(entity: EventEntity): EventModel {
@@ -30,22 +32,22 @@ export class EventRepositoryImplement
       throw new Error('Missing entity owner. Cannot convert to model.')
     }
 
-    const owner = new UserModel(
-      entity.owner.id,
-      entity.owner.firstName,
-      entity.owner.lastName,
-      entity.owner.email
-    )
+    const owner = new UserModel({
+      id: entity.owner.id,
+      username: entity.owner.username,
+      password: entity.owner.password,
+      salt: entity.owner.salt,
+    })
 
     const attendees = entity.attendees
       ? entity.attendees.map(
           (attendee) =>
-            new UserModel(
-              attendee.id,
-              attendee.firstName,
-              attendee.lastName,
-              attendee.email
-            )
+            new UserModel({
+              id: attendee.id,
+              username: attendee.username,
+              password: attendee.password,
+              salt: attendee.salt,
+            })
         )
       : []
 
@@ -60,7 +62,9 @@ export class EventRepositoryImplement
     )
   }
 
-  protected propertiesToEntity(properties: IUnsavedEventProperties): EventEntity {
+  protected propertiesToEntity(
+    properties: IUnsavedEventProperties
+  ): EventEntity {
     const entity = new EventEntity()
     entity.title = properties.title
     entity.description = properties.description

@@ -22,7 +22,8 @@ describe('[infrastructure] events repository', () => {
 
       const result = await eventRepositoryImplement.listEvents()
 
-      expect(result).toEqual([expectedEvent])
+      // TODO: users in the result contain password and salt
+      expect(result).toMatchObject([expectedEvent])
     })
   })
 

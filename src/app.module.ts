@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common'
 import { DatabaseModule } from 'src/_packages/database/database.module'
 import { EnvironmentModule } from 'src/_packages/env/env.module'
+import { AuthModule } from 'src/features/auth/auth.module'
 import { EventsModule } from 'src/features/events/events.module'
 
 @Module({
@@ -10,6 +11,7 @@ import { EventsModule } from 'src/features/events/events.module'
     }),
     DatabaseModule.register(),
     EventsModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
